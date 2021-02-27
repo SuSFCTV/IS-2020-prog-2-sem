@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/misha/Desktop/labs/prog/cpp1/geometry.h
+cmath
+-
+vector
+-
+
+C:/Users/misha/Desktop/labs/prog/cpp1/main.cpp
+geometry.h
+C:/Users/misha/Desktop/labs/prog/cpp1/geometry.h
+iostream
+-
+cassert
+-
+
