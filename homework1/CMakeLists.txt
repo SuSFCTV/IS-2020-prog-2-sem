@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.17)
-project(cpp1)
+project(pervayacpp)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 14)
 
-add_executable(cpp1 main.cpp geometry.h)
+add_executable(pervayacpp main.cpp geometry.h)

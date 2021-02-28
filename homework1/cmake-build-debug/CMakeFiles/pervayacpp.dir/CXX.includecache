@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/misha/Desktop/labs/prog/pervayacpp/geometry.h
+cmath
+-
+vector
+-
+
+C:/Users/misha/Desktop/labs/prog/pervayacpp/main.cpp
+geometry.h
+C:/Users/misha/Desktop/labs/prog/pervayacpp/geometry.h
+iostream
+-
+cassert
+-
+
