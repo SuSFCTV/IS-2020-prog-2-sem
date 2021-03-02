@@ -7,7 +7,7 @@
 #define _USE_MATH_DEFINES
 #include <cmath>
 #include <vector>
-
+//todo cpp
 using namespace std;
 class Point {
 private:
@@ -36,6 +36,7 @@ public:
     Point &operator=(const Point &other) = default;
 };
 
+//todo S P A C E S
 class PolygonalChain : public Point{
 private:
     vector <Point> poly_chain;
@@ -51,6 +52,7 @@ public:
         }
     }
     virtual ~PolygonalChain() {
+		//todo it's weird
         poly_chain.clear();
     }
     int getN() const{
@@ -94,6 +96,7 @@ public:
     Polygon() : ClosedPolygonalChain() {};
     Polygon(int n, Point *chain) : ClosedPolygonalChain(n , chain) {};
     Polygon(const Polygon &other)  = default;
+    //todo weird
     virtual double area() const {
         double ans = perimeter() / 2;
         for (int i = 0; i < getN() - 1; i++){
@@ -112,7 +115,7 @@ public:
     Triangle(int n, Point *chain) : Polygon(n, chain) {};
 
     Triangle(const Triangle &other)  = default;
-
+    //todo without sqrt
     bool hasRightAngle() const {
         double side_1, side_2, side_3;
         side_1 = distance(getPoint(0), getPoint(1));
@@ -125,6 +128,7 @@ public:
         if (side_2 > side_3){
             swap(side_2, side_3);
         }
+        //todo return expression
         if (side_1 * side_1 + side_2 * side_2 == side_3 * side_3){
             return true;
         }
@@ -157,6 +161,8 @@ public:
     }
     Trapezoid &operator=(const Trapezoid &other) = default;
 };
+
+//todo perimeter override
 class RegularPolygon : public Polygon {
 public:
     RegularPolygon() : Polygon() {};
