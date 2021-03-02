@@ -43,7 +43,6 @@ private:
 public:
     PolygonalChain() {
         poly_number = 0;
-        poly_chain.clear();
     }
     PolygonalChain(int number, Point chain[]){
         poly_number = number;
