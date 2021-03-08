@@ -4,6 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "C:/Users/misha/Desktop/labs/prog/pervayacpp/geometry.cpp" "C:/Users/misha/Desktop/labs/prog/pervayacpp/cmake-build-debug/CMakeFiles/pervayacpp.dir/geometry.cpp.obj"
   "C:/Users/misha/Desktop/labs/prog/pervayacpp/main.cpp" "C:/Users/misha/Desktop/labs/prog/pervayacpp/cmake-build-debug/CMakeFiles/pervayacpp.dir/main.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "MSVC")

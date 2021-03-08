@@ -82,6 +82,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/Users/misha/Desktop/labs/prog/pervayacpp/geometry.cpp">
+			<Option target="pervayacpp"/>
+		</Unit>
 		<Unit filename="C:/Users/misha/Desktop/labs/prog/pervayacpp/geometry.h">
 			<Option target="pervayacpp"/>
 		</Unit>

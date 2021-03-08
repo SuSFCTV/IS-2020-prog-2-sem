@@ -3,4 +3,4 @@ project(pervayacpp)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(pervayacpp main.cpp geometry.h)
+add_executable(pervayacpp main.cpp geometry.h geometry.cpp)

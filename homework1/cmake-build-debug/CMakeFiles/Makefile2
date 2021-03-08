@@ -78,12 +78,12 @@ clean: CMakeFiles\pervayacpp.dir\clean
 CMakeFiles\pervayacpp.dir\all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\pervayacpp.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\pervayacpp.dir\depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\pervayacpp.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\pervayacpp.dir\build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\misha\Desktop\labs\prog\pervayacpp\cmake-build-debug\CMakeFiles --progress-num=1,2 "Built target pervayacpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\misha\Desktop\labs\prog\pervayacpp\cmake-build-debug\CMakeFiles --progress-num=1,2,3 "Built target pervayacpp"
 .PHONY : CMakeFiles\pervayacpp.dir\all
 
 # Build rule for subdir invocation for target.
 CMakeFiles\pervayacpp.dir\rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\misha\Desktop\labs\prog\pervayacpp\cmake-build-debug\CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\misha\Desktop\labs\prog\pervayacpp\cmake-build-debug\CMakeFiles 3
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) CMakeFiles\pervayacpp.dir\all
 	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\misha\Desktop\labs\prog\pervayacpp\cmake-build-debug\CMakeFiles 0
 .PHONY : CMakeFiles\pervayacpp.dir\rule

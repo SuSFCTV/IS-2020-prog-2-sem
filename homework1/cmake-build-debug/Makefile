@@ -127,6 +127,33 @@ pervayacpp\fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\pervayacpp.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\pervayacpp.dir\build
 .PHONY : pervayacpp\fast
 
+geometry.obj: geometry.cpp.obj
+
+.PHONY : geometry.obj
+
+# target to build an object file
+geometry.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\pervayacpp.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\pervayacpp.dir\geometry.cpp.obj
+.PHONY : geometry.cpp.obj
+
+geometry.i: geometry.cpp.i
+
+.PHONY : geometry.i
+
+# target to preprocess a source file
+geometry.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\pervayacpp.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\pervayacpp.dir\geometry.cpp.i
+.PHONY : geometry.cpp.i
+
+geometry.s: geometry.cpp.s
+
+.PHONY : geometry.s
+
+# target to generate assembly for a file
+geometry.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\pervayacpp.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\pervayacpp.dir\geometry.cpp.s
+.PHONY : geometry.cpp.s
+
 main.obj: main.cpp.obj
 
 .PHONY : main.obj
@@ -163,6 +190,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... pervayacpp
+	@echo ... geometry.obj
+	@echo ... geometry.i
+	@echo ... geometry.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
