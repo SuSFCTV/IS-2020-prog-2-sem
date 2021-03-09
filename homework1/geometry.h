@@ -120,7 +120,7 @@ public:
 
     double area() const override;
 
-    double RegularPolygon::perimeter() const override;
+    double perimeter() const override;
 
     RegularPolygon &operator=(const RegularPolygon &other);
 };
