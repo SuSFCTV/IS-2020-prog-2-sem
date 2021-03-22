@@ -5,25 +5,51 @@
 #ifndef HOMEWORK2_POLYNOMIAL_H
 #define HOMEWORK2_POLYNOMIAL_H
 
+#include "vector"
+#include "cmath"
+#include "sstream"
+
+
+using namespace std;
+
 class Polynomial {
 private:
-    int size;
-    int *koef{};
-    int *deg{};
+    int* deg;
+    int* koef;
+    int* size;
 public:
-Polynomial();
+    Polynomial();
+    Polynomial(int min, int max, int* odd);
+    Polynomial(const Polynomial &p);
 
-Polynomial(int min , int max , int *koef);
+    ~Polynomial();
 
-Polynomial(const Polynomial &other);
+    Polynomial &operator=(const Polynomial &p);
+    friend bool operator==(const Polynomial &lhs, const Polynomial &rhs);
+    friend bool operator!=(const Polynomial &lhs, const Polynomial &rhs);
 
-~Polynomial();
+    friend Polynomial operator+(const Polynomial &lhs, const Polynomial &rhs);
+    friend Polynomial operator-(const Polynomial &p);
+    friend Polynomial operator-(const Polynomial &lhs, const Polynomial &rhs);
 
+    friend Polynomial operator+=(Polynomial &lhs, const Polynomial &rhs);
+    friend Polynomial operator-=(Polynomial &lhs, const Polynomial &rhs);
 
-int GetDeg();
+    friend Polynomial operator*(const Polynomial &p, int number);
+    friend Polynomial operator*(int number, const Polynomial &p);
+    friend Polynomial operator*(const Polynomial &lhs, const Polynomial &rhs);
+    friend Polynomial operator/(const Polynomial &p, int number);
 
-Polynomial &operator [] (int i);
+    friend Polynomial operator*=(Polynomial &lhs, const Polynomial &rhs);
+    friend Polynomial operator/=(Polynomial &p, int number);
 
+    friend std::stringstream &operator<< (std::stringstream &out, const Polynomial &p);
+    friend Polynomial &operator>> (std::stringstream &in, Polynomial &p);
+
+    int &operator[](int i);
+    int &operator[](int number) const;
+
+    double &get(double number);
 };
 
 

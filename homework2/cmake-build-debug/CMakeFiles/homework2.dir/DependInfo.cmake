@@ -7,7 +7,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "C:/Users/misha/Desktop/labs/prog/homework2/main.cpp" "C:/Users/misha/Desktop/labs/prog/homework2/cmake-build-debug/CMakeFiles/homework2.dir/main.cpp.obj"
   "C:/Users/misha/Desktop/labs/prog/homework2/polynomial.cpp" "C:/Users/misha/Desktop/labs/prog/homework2/cmake-build-debug/CMakeFiles/homework2.dir/polynomial.cpp.obj"
   )
-set(CMAKE_CXX_COMPILER_ID "MSVC")
+set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH

@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/misha/Desktop/labs/prog/homework2/main.cpp
+iostream
+-
+polynomial.h
+C:/Users/misha/Desktop/labs/prog/homework2/polynomial.h
+sstream
+-
+assert.h
+-
+
+C:/Users/misha/Desktop/labs/prog/homework2/polynomial.cpp
+polynomial.h
+C:/Users/misha/Desktop/labs/prog/homework2/polynomial.h
+
+C:/Users/misha/Desktop/labs/prog/homework2/polynomial.h
+vector
+C:/Users/misha/Desktop/labs/prog/homework2/vector
+cmath
+C:/Users/misha/Desktop/labs/prog/homework2/cmath
+sstream
+C:/Users/misha/Desktop/labs/prog/homework2/sstream
+
