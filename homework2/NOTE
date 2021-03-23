@@ -1,0 +1,19 @@
+Pulling https://github.com/SuSFCTV/IS-2020-prog-2-sem/homework2
+Pull finished
+It's compiled
+
+polynomial.cpp: In constructor 'Polynomial::Polynomial()':
+polynomial.cpp:4:12: warning: '*<unknown>.Polynomial::koef' is used uninitialized in this function [-Wuninitialized]
+    4 |     *this->koef = 0;
+      |      ~~~~~~^~~~
+polynomial.cpp: In constructor 'Polynomial::Polynomial(int, int, int*)':
+polynomial.cpp:11:12: warning: '*<unknown>.Polynomial::size' is used uninitialized in this function [-Wuninitialized]
+   11 |     *this->size = s;
+      |      ~~~~~~^~~~
+polynomial.cpp: In copy constructor 'Polynomial::Polynomial(const Polynomial&)':
+polynomial.cpp:23:12: warning: '*<unknown>.Polynomial::size' is used uninitialized in this function [-Wuninitialized]
+   23 |     *this->size = *p.size;
+      |      ~~~~~~^~~~
+
+
+
