@@ -6,16 +6,6 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/misha/Desktop/labs/prog/homework2/main.cpp
-iostream
--
-polynomial.h
-C:/Users/misha/Desktop/labs/prog/homework2/polynomial.h
-sstream
--
-assert.h
--
-
 C:/Users/misha/Desktop/labs/prog/homework2/polynomial.cpp
 polynomial.h
 C:/Users/misha/Desktop/labs/prog/homework2/polynomial.h

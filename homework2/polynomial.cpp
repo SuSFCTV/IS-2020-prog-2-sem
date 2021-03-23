@@ -1,22 +1,13 @@
 #include "polynomial.h"
 
 Polynomial::Polynomial() {
-    this->koef = (int *) malloc(sizeof(int));
     *this->koef = 0;
-
-    this->deg = (int *) malloc(sizeof(int));
     *this->deg = 0;
-
-    this->size = (int *) malloc(sizeof(int));
     *this->size = 1;
 }
 
 Polynomial::Polynomial(int min, int max, int *koef) {
     int s = max - min + 1;
-
-    this->deg = (int *) malloc(s * sizeof(int));
-    this->koef = (int *) malloc(s * sizeof(int));
-    this->size = (int *) malloc(sizeof(int));
     *this->size = s;
     int t = min;
 
@@ -29,11 +20,7 @@ Polynomial::Polynomial(int min, int max, int *koef) {
 }
 
 Polynomial::Polynomial(const Polynomial &p) {
-    this->size = (int *) malloc(sizeof(int));
     *this->size = *p.size;
-
-    this->koef = (int *) malloc((*this->size) * sizeof(int));
-    this->deg = (int *) malloc((*this->size) * sizeof(int));
 
     for (int i = 0; i < *this->size; i++) {
         this->deg[i] = p.deg[i];
