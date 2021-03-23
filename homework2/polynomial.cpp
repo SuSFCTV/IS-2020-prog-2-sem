@@ -28,6 +28,7 @@ Polynomial::Polynomial(const Polynomial &p) {
     }
 }
 
+//todo delete ~
 Polynomial::~Polynomial() = default;
 
 Polynomial &Polynomial::operator=(const Polynomial &p) {
@@ -80,6 +81,7 @@ Polynomial operator-(const Polynomial &p) {
     return k;
 };
 
+//todo + from +=
 Polynomial operator-(const Polynomial &lhs, const Polynomial &rhs) {
     return lhs + (-rhs);
 };
@@ -96,6 +98,7 @@ Polynomial operator-=(Polynomial &lhs, const Polynomial &rhs) {
 
 Polynomial operator*(const Polynomial &p, int num) {
     int tmp_koef[*p.size];
+    //todo for_each
     for (int i = 0; i < *p.size; i++) {
         tmp_koef[i] = p.koef[i] * num;
     }
@@ -239,6 +242,7 @@ Polynomial &operator>>(std::stringstream &fin, Polynomial &p) {
     return p;
 };
 
+//todo return int
 int &Polynomial::operator[](int num) const {
     if (num > this->deg[0] && num < this->deg[*this->size - 1]) {
         int ind = 0;
@@ -294,6 +298,7 @@ int &Polynomial::operator[](int num) {
     }
 };
 
+//todo get O(n)
 double &Polynomial::get(double num) {
     auto *ans = new double;
     *ans = 0;

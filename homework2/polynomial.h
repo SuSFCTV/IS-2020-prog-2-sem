@@ -16,6 +16,7 @@ class Polynomial {
 private:
     int* deg;
     int* koef;
+    //todo int, new
     int* size;
 public:
     Polynomial();
