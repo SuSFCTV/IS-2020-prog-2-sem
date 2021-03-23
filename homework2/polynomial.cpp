@@ -6,7 +6,7 @@ Polynomial::Polynomial() {
 
     this->deg = (int *) malloc(sizeof(int));
     *this->deg = 0;
-    
+
     this->size = (int *) malloc(sizeof(int));
     *this->size = 1;
 }
@@ -135,18 +135,18 @@ Polynomial operator*(const Polynomial &lhs, const Polynomial &rhs) {
     int min = tmp_deg[0];
     int max = tmp_deg[tmp_size - 1];
     int s = max - min + 1;
-    int polynomial_deg[s], polynomial_koef[s];
+    int poly_deg[s], polynomial_koef[s];
     int tmp = min;
 
     for (int i = 0; i < s; i++) {
-        polynomial_deg[i] = tmp;
+        poly_deg[i] = tmp;
         polynomial_koef[i] = 0;
         tmp++;
     }
 
     for (int i = 0; i < s; i++) {
         for (int j = 0; j < tmp_size; j++) {
-            if (tmp_deg[j] == polynomial_deg[i]) {
+            if (tmp_deg[j] == poly_deg[i]) {
                 polynomial_koef[i] += tmp_koef[j];
             }
         }
@@ -231,22 +231,21 @@ Polynomial &operator>>(std::stringstream &in, Polynomial &p) {
         if ((i + 1) == tmp.end() || *(i + 1) == '-' || *(i + 1) == '+')
             break;
     }
-    istringstream (tmp_num) >> min;
+    istringstream(tmp_num) >> min;
 
     tmp_num.clear();
 
     for (auto i = tmp.end(); i != tmp.begin(); i--) {
         if (*i == '^') {
-            while(i+1 != tmp.end() && *(i+1) != '-' && *(i+1) != '+'){
+            while (i + 1 != tmp.end() && *(i + 1) != '-' && *(i + 1) != '+') {
                 i++;
-                tmp_num+=*i;
+                tmp_num += *i;
             }
             break;
         }
 
     }
-    istringstream (tmp_num) >> max;
-
+    istringstream(tmp_num) >> max;
     return p;
 };
 
