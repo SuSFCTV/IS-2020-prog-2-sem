@@ -173,30 +173,30 @@ Polynomial operator/=(Polynomial &p, int num) {
     return p;
 };
 
-std::stringstream &operator<<(std::stringstream &out, const Polynomial &p) {
+std::stringstream &operator<<(std::stringstream &fout, const Polynomial &p) {
     int tmp_size = *p.size;
     int tmp = 0;
     if (tmp_size == 1 and p.koef[0] == 0) {
-        out << "0";
+        fout << "0";
     } else {
         for (int i = tmp_size - 1; i >= 0; i--) {
             if (p.koef[i] != 0) {
-                if (i < tmp_size - 1 && p.koef[i] > 0 && !out.str().empty() && out.str().back() != '\n') {
-                    out << "+";
+                if (i < tmp_size - 1 && p.koef[i] > 0 && !fout.str().empty() && fout.str().back() != '\n') {
+                    fout << "+";
                 }
 
                 if (p.koef[i] == -1 && p.deg[i] != 0) {
-                    out << "-";
+                    fout << "-";
                 } else if (p.koef[i] == 1 && p.deg[i] != 0) {
-                    out << "";
+                    fout << "";
                 } else {
-                    out << p.koef[i];
+                    fout << p.koef[i];
                 }
 
                 if (p.deg[i] != 0) {
-                    out << "x";
+                    fout << "x";
                     if (p.deg[i] != 1) {
-                        out << "^" << p.deg[i];
+                        fout << "^" << p.deg[i];
                     }
                 }
 
@@ -208,14 +208,14 @@ std::stringstream &operator<<(std::stringstream &out, const Polynomial &p) {
             tmp++;
         }
     }
-    if (tmp == *p.size && out.str().empty()) {
-        out << "0";
+    if (tmp == *p.size && fout.str().empty()) {
+        fout << "0";
     }
-    return out;
+    return fout;
 };
 
-Polynomial &operator>>(std::stringstream &in, Polynomial &p) {
-    string tmp = in.str();
+Polynomial &operator>>(std::stringstream &fin, Polynomial &p) {
+    string tmp = fin.str();
     int min = 0;
     int max = 0;
     bool num = false;
