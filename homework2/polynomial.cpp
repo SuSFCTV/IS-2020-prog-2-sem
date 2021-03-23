@@ -181,7 +181,7 @@ std::stringstream &operator<<(std::stringstream &fout, const Polynomial &p) {
     } else {
         for (int i = tmp_size - 1; i >= 0; i--) {
             if (p.koef[i] != 0) {
-                if (i < tmp_size - 1 && p.koef[i] > 0 && !fout.str().empty() && fout.str().back() != '\n') {
+                if (p.koef[i] > 0 && i < tmp_size - 1 && !fout.str().empty() && fout.str().back() != '\n') {
                     fout << "+";
                 }
 
@@ -216,9 +216,9 @@ std::stringstream &operator<<(std::stringstream &fout, const Polynomial &p) {
 
 Polynomial &operator>>(std::stringstream &fin, Polynomial &p) {
     string tmp = fin.str();
+    bool num = false;
     int min = 0;
     int max = 0;
-    bool num = false;
     string tmp_num;
 
     for (auto i = tmp.begin(); i != tmp.end(); i++) {
@@ -226,10 +226,13 @@ Polynomial &operator>>(std::stringstream &fin, Polynomial &p) {
             num = true;
             i++;
         }
-        if (num)
+        if (num) {
             tmp_num += *i;
-        if ((i + 1) == tmp.end() || *(i + 1) == '-' || *(i + 1) == '+')
+        }
+
+        if ((i + 1) == tmp.end() || *(i + 1) == '-' || *(i + 1) == '+'){
             break;
+        }
     }
     istringstream(tmp_num) >> min;
 
@@ -251,18 +254,18 @@ Polynomial &operator>>(std::stringstream &fin, Polynomial &p) {
 
 int &Polynomial::operator[](int num) const {
     if (num > this->deg[0] && num < this->deg[*this->size - 1]) {
-        int index = 0;
+        int ind = 0;
         for (int i = 0; i < *this->size; i++) {
             if (num == this->deg[i]) {
                 break;
             }
-            index++;
+            ind++;
         }
-        return this->koef[index];
+        return this->koef[ind];
     } else {
-        int *a = new int;
-        *a = 0;
-        return *a;
+        int *ans = new int;
+        *ans = 0;
+        return *ans;
     }
 }
 
@@ -271,8 +274,8 @@ int &Polynomial::operator[](int num) {
         const Polynomial p = *this;
         return p[num];
     } else if (num < this->deg[0]) {
-        int max = this->deg[*this->size - 1];
         int min = num;
+        int max = this->deg[*this->size - 1];
         int tmp_size = max - min + 1;
         int tmp_koef[tmp_size];
         for (int i = 0; i < tmp_size; i++) {
