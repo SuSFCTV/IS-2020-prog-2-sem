@@ -34,7 +34,8 @@ public:
     friend Polynomial operator-(const Polynomial &p);
     friend Polynomial operator-(const Polynomial &lhs, const Polynomial &rhs);
 
-    friend Polynomial operator+=(Polynomial &lhs, const Polynomial &rhs);
+    //friend Polynomial operator+=(const Polynomial &lhs, const Polynomial &rhs);
+    Polynomial operator+=(const Polynomial &rhs);
     friend Polynomial operator-=(Polynomial &lhs, const Polynomial &rhs);
 
     friend Polynomial operator*(const Polynomial &p, int number);

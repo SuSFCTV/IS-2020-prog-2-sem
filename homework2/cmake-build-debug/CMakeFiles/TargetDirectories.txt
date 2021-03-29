@@ -1,3 +1,3 @@
-C:/Users/misha/Desktop/labs/prog/homework2/cmake-build-debug/CMakeFiles/homework2.dir
-C:/Users/misha/Desktop/labs/prog/homework2/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/misha/Desktop/labs/prog/homework2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/misha/Desktop/labs/prog/homework2save/cmake-build-debug/CMakeFiles/homework2.dir
+C:/Users/misha/Desktop/labs/prog/homework2save/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/misha/Desktop/labs/prog/homework2save/cmake-build-debug/CMakeFiles/rebuild_cache.dir

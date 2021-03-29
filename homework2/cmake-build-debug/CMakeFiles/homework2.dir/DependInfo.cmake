@@ -4,8 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "C:/Users/misha/Desktop/labs/prog/homework2/main.cpp" "C:/Users/misha/Desktop/labs/prog/homework2/cmake-build-debug/CMakeFiles/homework2.dir/main.cpp.obj"
-  "C:/Users/misha/Desktop/labs/prog/homework2/polynomial.cpp" "C:/Users/misha/Desktop/labs/prog/homework2/cmake-build-debug/CMakeFiles/homework2.dir/polynomial.cpp.obj"
+  "C:/Users/misha/Desktop/labs/prog/homework2save/main.cpp" "C:/Users/misha/Desktop/labs/prog/homework2save/cmake-build-debug/CMakeFiles/homework2.dir/main.cpp.obj"
+  "C:/Users/misha/Desktop/labs/prog/homework2save/polynomial.cpp" "C:/Users/misha/Desktop/labs/prog/homework2save/cmake-build-debug/CMakeFiles/homework2.dir/polynomial.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

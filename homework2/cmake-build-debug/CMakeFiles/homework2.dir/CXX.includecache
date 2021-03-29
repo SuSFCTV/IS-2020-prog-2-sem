@@ -6,17 +6,27 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/misha/Desktop/labs/prog/homework2/polynomial.cpp
+C:/Users/misha/Desktop/labs/prog/homework2save/main.cpp
+iostream
+-
 polynomial.h
-C:/Users/misha/Desktop/labs/prog/homework2/polynomial.h
+C:/Users/misha/Desktop/labs/prog/homework2save/polynomial.h
+sstream
+-
+assert.h
+-
+
+C:/Users/misha/Desktop/labs/prog/homework2save/polynomial.cpp
+polynomial.h
+C:/Users/misha/Desktop/labs/prog/homework2save/polynomial.h
 algorithm
 -
 
-C:/Users/misha/Desktop/labs/prog/homework2/polynomial.h
+C:/Users/misha/Desktop/labs/prog/homework2save/polynomial.h
 vector
-C:/Users/misha/Desktop/labs/prog/homework2/vector
+C:/Users/misha/Desktop/labs/prog/homework2save/vector
 cmath
-C:/Users/misha/Desktop/labs/prog/homework2/cmath
+C:/Users/misha/Desktop/labs/prog/homework2save/cmath
 sstream
-C:/Users/misha/Desktop/labs/prog/homework2/sstream
+C:/Users/misha/Desktop/labs/prog/homework2save/sstream
 

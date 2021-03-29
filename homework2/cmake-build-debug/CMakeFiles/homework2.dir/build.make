@@ -62,10 +62,10 @@ RM = "C:\Program Files\JetBrains\CLion 2020.2.4\bin\cmake\win\bin\cmake.exe" -E 
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\misha\Desktop\labs\prog\homework2
+CMAKE_SOURCE_DIR = C:\Users\misha\Desktop\labs\prog\homework2save
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\misha\Desktop\labs\prog\homework2\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\misha\Desktop\labs\prog\homework2save\cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/homework2.dir/depend.make
@@ -78,29 +78,29 @@ include CMakeFiles/homework2.dir/flags.make
 
 CMakeFiles/homework2.dir/main.cpp.obj: CMakeFiles/homework2.dir/flags.make
 CMakeFiles/homework2.dir/main.cpp.obj: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\misha\Desktop\labs\prog\homework2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/homework2.dir/main.cpp.obj"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\homework2.dir\main.cpp.obj -c C:\Users\misha\Desktop\labs\prog\homework2\main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\misha\Desktop\labs\prog\homework2save\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/homework2.dir/main.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\homework2.dir\main.cpp.obj -c C:\Users\misha\Desktop\labs\prog\homework2save\main.cpp
 
 CMakeFiles/homework2.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/homework2.dir/main.cpp.i"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\misha\Desktop\labs\prog\homework2\main.cpp > CMakeFiles\homework2.dir\main.cpp.i
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\misha\Desktop\labs\prog\homework2save\main.cpp > CMakeFiles\homework2.dir\main.cpp.i
 
 CMakeFiles/homework2.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/homework2.dir/main.cpp.s"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\misha\Desktop\labs\prog\homework2\main.cpp -o CMakeFiles\homework2.dir\main.cpp.s
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\misha\Desktop\labs\prog\homework2save\main.cpp -o CMakeFiles\homework2.dir\main.cpp.s
 
 CMakeFiles/homework2.dir/polynomial.cpp.obj: CMakeFiles/homework2.dir/flags.make
 CMakeFiles/homework2.dir/polynomial.cpp.obj: ../polynomial.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\misha\Desktop\labs\prog\homework2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/homework2.dir/polynomial.cpp.obj"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\homework2.dir\polynomial.cpp.obj -c C:\Users\misha\Desktop\labs\prog\homework2\polynomial.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\misha\Desktop\labs\prog\homework2save\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/homework2.dir/polynomial.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\homework2.dir\polynomial.cpp.obj -c C:\Users\misha\Desktop\labs\prog\homework2save\polynomial.cpp
 
 CMakeFiles/homework2.dir/polynomial.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/homework2.dir/polynomial.cpp.i"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\misha\Desktop\labs\prog\homework2\polynomial.cpp > CMakeFiles\homework2.dir\polynomial.cpp.i
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\misha\Desktop\labs\prog\homework2save\polynomial.cpp > CMakeFiles\homework2.dir\polynomial.cpp.i
 
 CMakeFiles/homework2.dir/polynomial.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/homework2.dir/polynomial.cpp.s"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\misha\Desktop\labs\prog\homework2\polynomial.cpp -o CMakeFiles\homework2.dir\polynomial.cpp.s
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\misha\Desktop\labs\prog\homework2save\polynomial.cpp -o CMakeFiles\homework2.dir\polynomial.cpp.s
 
 # Object files for target homework2
 homework2_OBJECTS = \
@@ -116,7 +116,7 @@ homework2.exe: CMakeFiles/homework2.dir/build.make
 homework2.exe: CMakeFiles/homework2.dir/linklibs.rsp
 homework2.exe: CMakeFiles/homework2.dir/objects1.rsp
 homework2.exe: CMakeFiles/homework2.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\misha\Desktop\labs\prog\homework2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable homework2.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\misha\Desktop\labs\prog\homework2save\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable homework2.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\homework2.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -129,6 +129,6 @@ CMakeFiles/homework2.dir/clean:
 .PHONY : CMakeFiles/homework2.dir/clean
 
 CMakeFiles/homework2.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\misha\Desktop\labs\prog\homework2 C:\Users\misha\Desktop\labs\prog\homework2 C:\Users\misha\Desktop\labs\prog\homework2\cmake-build-debug C:\Users\misha\Desktop\labs\prog\homework2\cmake-build-debug C:\Users\misha\Desktop\labs\prog\homework2\cmake-build-debug\CMakeFiles\homework2.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\misha\Desktop\labs\prog\homework2save C:\Users\misha\Desktop\labs\prog\homework2save C:\Users\misha\Desktop\labs\prog\homework2save\cmake-build-debug C:\Users\misha\Desktop\labs\prog\homework2save\cmake-build-debug C:\Users\misha\Desktop\labs\prog\homework2save\cmake-build-debug\CMakeFiles\homework2.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/homework2.dir/depend
 

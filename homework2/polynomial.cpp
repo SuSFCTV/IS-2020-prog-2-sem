@@ -1,6 +1,6 @@
 #include "polynomial.h"
 #include <algorithm>
-//fixed constructor
+
 Polynomial::Polynomial() {
     this->koef = new int;
     *this->koef = 0;
@@ -17,8 +17,8 @@ Polynomial::Polynomial(int min, int max, int *koefs) {
     this->min_d = min;
     this->max_d = max;
     int t = min;
-    koef = new int[this->size];
-    deg = new int[this->size];
+    koef = new int[s];
+    deg = new int[s];
     for (int i = 0; i < s; i++) {
         this->deg[i] = t;
         this->koef[i] = *koefs;
@@ -39,32 +39,34 @@ Polynomial::Polynomial(const Polynomial &p) {
     }
 }
 
-void Polynomial::resize_koef(int t_size, int bias){
+void Polynomial::resize_koef(int t_size, int bias) {
     int *tmp = new int[t_size];
-    for(int i = 0; i < t_size; i++){
-        if(i >= bias && (i - bias) < this->size)
+    for (int i = 0; i < t_size; i++) {
+        if (i >= bias && (i - bias) < this->size)
             tmp[i] = koef[i - bias];
     }
-    delete [] koef;
+    delete[] koef;
     koef = tmp;
     this->size = t_size;
     min_d -= bias;
     max_d = min_d + this->size - 1;
 }
-//fixed "to do delete"
-Polynomial::~Polynomial() {
-    delete[] koef;
-    delete[] deg;
-};
+
+Polynomial::~Polynomial() = default;
 
 Polynomial &Polynomial::operator=(const Polynomial &p) {
     min_d = p.min_d;
     max_d = p.max_d;
     size = p.size;
     delete[] koef;
+    delete[] deg;
     koef = new int[size];
-    for (int i = 0; i < size; i++)
+    deg = new int[size];
+    for (int i = 0; i < size; i++) {
         koef[i] = p.koef[i];
+        deg[i] = p.deg[i];
+    }
+
     return *this;
 }
 
@@ -80,29 +82,37 @@ bool Polynomial::operator!=(const Polynomial &rhs) {
     return !(*this == rhs);
 };
 
+//fixed +/+=
 Polynomial operator+(const Polynomial &lhs, const Polynomial &rhs) {
-    int min = lhs.deg[0] <= rhs.deg[0] ? lhs.deg[0] : rhs.deg[0];
-    int max = lhs.deg[lhs.size - 1] >= rhs.deg[rhs.size - 1] ? lhs.deg[lhs.size - 1] : rhs.deg[rhs.size - 1];
-    int s = max - min + 1;
-    int koef[s];
-    int tmp_deg = min;
-    for (int i = 0; i < s; i++) {
-        koef[i] = 0;
-        for (int j = 0; j < lhs.size; j++) {
-            if (lhs.deg[j] == tmp_deg) {
-                koef[i] += lhs.koef[j];
+    Polynomial new_pol{lhs};
+    return new_pol += rhs;
+};
+
+Polynomial Polynomial::operator+=(const Polynomial &p) {
+    int min = this->deg[0] <= p.deg[0] ? this->deg[0] : p.deg[0];
+    int max =
+            this->deg[this->size - 1] >= p.deg[p.size - 1] ? this->deg[this->size - 1] : p.deg[p.size - 1];
+    int temp_size = max - min + 1;
+    int temp_odds[temp_size];
+    int temp_degree = min;
+    for (int i = 0; i < temp_size; i++) {
+        temp_odds[i] = 0;
+        for (int j = 0; j < this->size; j++) {
+            if (this->deg[j] == temp_degree) {
+                temp_odds[i] += this->koef[j];
             }
         }
-        for (int j = 0; j < rhs.size; j++) {
-            if (rhs.deg[j] == tmp_deg) {
-                koef[i] += rhs.koef[j];
+        for (int j = 0; j < p.size; j++) {
+            if (p.deg[j] == temp_degree) {
+                temp_odds[i] += p.koef[j];
             }
         }
-        tmp_deg++;
+        temp_degree++;
     }
 
-    return Polynomial(min, max, koef);
-};
+    *this = Polynomial(min, max, temp_odds);
+    return *this;
+}
 
 Polynomial operator-(const Polynomial &p) {
     int *temp = new int[p.size];
@@ -115,10 +125,6 @@ Polynomial operator-(const Polynomial &lhs, const Polynomial &rhs) {
     return lhs + (-rhs);
 };
 
-Polynomial operator+=(Polynomial &lhs, const Polynomial &rhs) {
-    lhs = lhs + rhs;
-    return lhs;
-};
 
 Polynomial operator-=(Polynomial &lhs, const Polynomial &rhs) {
     lhs = lhs - rhs;
@@ -251,7 +257,7 @@ Polynomial &operator>>(std::stringstream &fin, Polynomial &p) {
             tmp_num += *i;
         }
 
-        if ((i + 1) == tmp.end() || *(i + 1) == '-' || *(i + 1) == '+'){
+        if ((i + 1) == tmp.end() || *(i + 1) == '-' || *(i + 1) == '+') {
             break;
         }
     }
@@ -273,7 +279,21 @@ Polynomial &operator>>(std::stringstream &fin, Polynomial &p) {
     return p;
 };
 
-//fixed "to do return int"
+//int Polynomial::operator[](int num) const {
+//    if (num < min_d || num > max_d)
+//        return 0;
+//    return koef[num - min_d];
+//}
+//
+//int &Polynomial::operator[](int num) {
+//    if (num >= min_d && num <= max_d)
+//        return koef[num - min_d];
+//    int t_min = min(min_d, num);
+//    int t_max = max(max_d, num);
+//    int t_size = (int)(t_max - t_min + 1);
+//    resize_koef(t_size, min_d - t_min);
+//    return koef[num - min_d];
+//};
 int Polynomial::operator[](int num) const {
     if (num < min_d || num > max_d)
         return 0;
@@ -296,14 +316,23 @@ int &Polynomial::operator[](int num) {
     return koef[num - min_d];
 }
 
-//fixed O(n)
-double Polynomial::get(double num) {
-    double ans = 0;
-    double x = pow(num, this->deg[0]);
+//double Polynomial::get(float num) {
+//    double t = koef[0] * powf(num, min_d);
+//    double ans = t;
+//    for(int i = 0; i < this->size; i++){
+//        t *= num;
+//        ans += koef[i] * t;
+//    }
+//    return ans;
+//}
+double Polynomial::get(double number) {
+    //fixed no *
+    double answer = 0;
+    double x = pow(number, this->deg[0]);
     for (int i = 0; i < this->size; i++) {
-        ans += this->koef[i] * x;
-        x *= num;
+        answer += this->koef[i] * x;
+        x *= number;
     }
-    return ans;
+    return answer;
 }
 
