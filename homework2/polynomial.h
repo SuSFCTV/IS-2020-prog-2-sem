@@ -14,20 +14,21 @@ using namespace std;
 
 class Polynomial {
 private:
-    int* deg;
-    int* koef;
-    //todo int, new
-    int* size;
+    int* deg{};
+    int* koef{};
+    int size{};
+    int min_d;
+    int max_d;
 public:
     Polynomial();
     Polynomial(int min, int max, int* odd);
     Polynomial(const Polynomial &p);
 
     ~Polynomial();
-
+    void resize_koef(int t_size, int bias);
     Polynomial &operator=(const Polynomial &p);
-    friend bool operator==(const Polynomial &lhs, const Polynomial &rhs);
-    friend bool operator!=(const Polynomial &lhs, const Polynomial &rhs);
+    bool operator==(const Polynomial &rhs);
+    bool operator!=(const Polynomial &rhs);
 
     friend Polynomial operator+(const Polynomial &lhs, const Polynomial &rhs);
     friend Polynomial operator-(const Polynomial &p);
@@ -47,10 +48,10 @@ public:
     friend std::stringstream &operator<< (std::stringstream &out, const Polynomial &p);
     friend Polynomial &operator>> (std::stringstream &in, Polynomial &p);
 
-    int &operator[](int i);
-    int &operator[](int number) const;
+    int &operator[](int i) ;
+    int operator[](int number) const;
 
-    double &get(double number);
+    double get(double number);
 };
 
 
