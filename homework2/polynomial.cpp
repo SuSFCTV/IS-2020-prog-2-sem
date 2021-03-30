@@ -123,14 +123,14 @@ Polynomial operator-=(Polynomial &lhs, const Polynomial &rhs) {
 };
 
 //fixed for_each
-Polynomial operator*(const Polynomial &p, int num) {
-    int temp_koef[p.size];
+Polynomial operator*(const Polynomial &lhs, int num) {
+    int tmp_koef[lhs.size];
     int i = 0;
-    for_each(temp_koef, temp_koef + p.size, [num, p, &i](int &n) {
-        n = p.koef[i] * num;
+    for_each(tmp_koef, tmp_koef + lhs.size, [num, lhs, &i](int &t) {
+        t = lhs.koef[i] * num;
         i++;
     });
-    return Polynomial(p.deg[0], p.deg[p.size - 1], temp_koef);
+    return Polynomial(lhs.deg[0], lhs.deg[lhs.size - 1], tmp_koef);
 }
 
 Polynomial operator*(int num, const Polynomial &p) {
@@ -141,7 +141,7 @@ Polynomial operator*(const Polynomial &lhs, const Polynomial &rhs) {
     int tmp_size = (lhs.size) * (rhs.size);
     int tmp_koef[tmp_size], tmp_deg[tmp_size];
     int it = 0;
-    int s = max - min + 1;
+
     for (int i = 0; i < lhs.size; i++) {
         for (int j = 0; j < rhs.size; j++) {
             tmp_koef[it] = lhs.koef[i] * rhs.koef[j];
@@ -152,24 +152,25 @@ Polynomial operator*(const Polynomial &lhs, const Polynomial &rhs) {
 
     int min = tmp_deg[0];
     int max = tmp_deg[tmp_size - 1];
-    int poly_deg[s], polynomial_koef[s];
     int tmp = min;
+    int s = max - min + 1;
+    int poly_deg[s], pol_koef[s];
 
     for (int i = 0; i < s; i++) {
         poly_deg[i] = tmp;
-        polynomial_koef[i] = 0;
+        pol_koef[i] = 0;
         tmp++;
     }
 
     for (int i = 0; i < s; i++) {
         for (int j = 0; j < tmp_size; j++) {
             if (tmp_deg[j] == poly_deg[i]) {
-                polynomial_koef[i] += tmp_koef[j];
+                pol_koef[i] += tmp_koef[j];
             }
         }
     }
 
-    return Polynomial(min, max, polynomial_koef);
+    return Polynomial(min, max, pol_koef);
 };
 
 Polynomial operator/(const Polynomial &p, int num) {
@@ -269,7 +270,7 @@ Polynomial &operator>>(std::stringstream &fin, Polynomial &p) {
     return p;
 };
 
-//fixed return int
+
 int Polynomial::operator[](int num) const {
     if (num < min_d || num > max_d)
         return 0;
