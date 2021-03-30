@@ -270,7 +270,7 @@ Polynomial &operator>>(std::stringstream &fin, Polynomial &p) {
     return p;
 };
 
-
+//fixed return int
 int Polynomial::operator[](int num) const {
     if (num < min_d || num > max_d)
         return 0;
