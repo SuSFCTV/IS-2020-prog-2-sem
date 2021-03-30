@@ -124,13 +124,9 @@ Polynomial operator-=(Polynomial &lhs, const Polynomial &rhs) {
 
 //fixed for_each
 Polynomial operator*(const Polynomial &lhs, int num) {
-    int tmp_koef[lhs.size];
-    int i = 0;
-    for_each(tmp_koef, tmp_koef + lhs.size, [num, lhs, &i](int &t) {
-        t = lhs.koef[i] * num;
-        i++;
-    });
-    return Polynomial(lhs.deg[0], lhs.deg[lhs.size - 1], tmp_koef);
+    Polynomial new_p { lhs };
+    for_each(new_p.koef, new_p.koef + new_p.max_d - new_p.min_d + 1, [&](int &n){n *= num;});
+    return new_p ;
 }
 
 Polynomial operator*(int num, const Polynomial &p) {
