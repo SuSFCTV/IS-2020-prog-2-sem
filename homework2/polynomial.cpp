@@ -1,7 +1,6 @@
 #include "polynomial.h"
 #include <algorithm>
 
-//fixed "weird constructor"
 Polynomial::Polynomial() {
     this->koef = new int;
     *this->koef = 0;
@@ -40,7 +39,6 @@ Polynomial::Polynomial(const Polynomial &p) {
     }
 }
 
-//fixed destructor
 Polynomial::~Polynomial() {
     delete[] koef;
     delete[] deg;
@@ -74,7 +72,6 @@ bool Polynomial::operator!=(const Polynomial &rhs) {
     return !(*this == rhs);
 };
 
-//fixed +/+=
 Polynomial operator+(const Polynomial &lhs, const Polynomial &rhs) {
     Polynomial new_pol{lhs};
     return new_pol += rhs;
@@ -112,17 +109,18 @@ Polynomial operator-(const Polynomial &p) {
     return Polynomial(p.min_d, p.max_d, temp);
 };
 
+//todo without creating new object
 Polynomial operator-(const Polynomial &lhs, const Polynomial &rhs) {
     return lhs + (-rhs);
 };
 
 
+//todo - from -=
 Polynomial operator-=(Polynomial &lhs, const Polynomial &rhs) {
     lhs = lhs - rhs;
     return lhs;
 };
 
-//fixed for_each
 Polynomial operator*(const Polynomial &lhs, int num) {
     Polynomial new_p { lhs };
     for_each(new_p.koef, new_p.koef + new_p.max_d - new_p.min_d + 1, [&](int &n){n *= num;});
@@ -177,6 +175,7 @@ Polynomial operator/(const Polynomial &p, int num) {
     return Polynomial(p.deg[0], p.deg[p.size - 1], tmp_koef);
 };
 
+//todo * from *=
 Polynomial operator*=(Polynomial &lhs, const Polynomial &rhs) {
     lhs = lhs * rhs;
     return lhs;
@@ -289,7 +288,7 @@ int &Polynomial::operator[](int num) {
     return koef[num - min_d];
 }
 
-//fixed "to do O(n)"
+
 double Polynomial::get(double number) {
     double ans = 0;
     double tmp = pow(number, this->deg[0]);
