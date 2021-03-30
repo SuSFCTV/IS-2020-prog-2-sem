@@ -141,7 +141,7 @@ Polynomial operator*(const Polynomial &lhs, const Polynomial &rhs) {
     int tmp_size = (lhs.size) * (rhs.size);
     int tmp_koef[tmp_size], tmp_deg[tmp_size];
     int it = 0;
-
+    int s = max - min + 1;
     for (int i = 0; i < lhs.size; i++) {
         for (int j = 0; j < rhs.size; j++) {
             tmp_koef[it] = lhs.koef[i] * rhs.koef[j];
@@ -152,7 +152,6 @@ Polynomial operator*(const Polynomial &lhs, const Polynomial &rhs) {
 
     int min = tmp_deg[0];
     int max = tmp_deg[tmp_size - 1];
-    int s = max - min + 1;
     int poly_deg[s], polynomial_koef[s];
     int tmp = min;
 
