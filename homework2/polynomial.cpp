@@ -109,16 +109,20 @@ Polynomial operator-(const Polynomial &p) {
     return Polynomial(p.min_d, p.max_d, temp);
 };
 
-//todo without creating new object
+//fixed todo without creating new object
 Polynomial operator-(const Polynomial &lhs, const Polynomial &rhs) {
-    return lhs + (-rhs);
+    auto temp = lhs;
+    temp -= rhs;
+    return temp;
 };
 
 
-//todo - from -=
-Polynomial operator-=(Polynomial &lhs, const Polynomial &rhs) {
-    lhs = lhs - rhs;
-    return lhs;
+//fixed todo - from -=
+Polynomial Polynomial::operator-=(const Polynomial &p) {
+    *this = *this * -1;
+    *this += p;
+    *this = *this * -1;
+    return *this;
 };
 
 Polynomial operator*(const Polynomial &lhs, int num) {
@@ -132,14 +136,29 @@ Polynomial operator*(int num, const Polynomial &p) {
 }
 
 Polynomial operator*(const Polynomial &lhs, const Polynomial &rhs) {
-    int tmp_size = (lhs.size) * (rhs.size);
+    auto temp = lhs;
+    temp *= rhs;
+    return temp;
+};
+
+Polynomial operator/(const Polynomial &p, int num) {
+    int tmp_koef[p.size];
+    for (int i = 0; i < p.size; i++) {
+        tmp_koef[i] = p.koef[i] / num;
+    }
+    return Polynomial(p.deg[0], p.deg[p.size - 1], tmp_koef);
+};
+
+//fixed todo * from *=
+Polynomial Polynomial::operator*=(const Polynomial &rhs) {
+    int tmp_size = (this->size) * (rhs.size);
     int tmp_koef[tmp_size], tmp_deg[tmp_size];
     int it = 0;
 
-    for (int i = 0; i < lhs.size; i++) {
+    for (int i = 0; i < this->size; i++) {
         for (int j = 0; j < rhs.size; j++) {
-            tmp_koef[it] = lhs.koef[i] * rhs.koef[j];
-            tmp_deg[it] = lhs.deg[i] + rhs.deg[j];
+            tmp_koef[it] = this->koef[i] * rhs.koef[j];
+            tmp_deg[it] = this->deg[i] + rhs.deg[j];
             it++;
         }
     }
@@ -163,22 +182,8 @@ Polynomial operator*(const Polynomial &lhs, const Polynomial &rhs) {
             }
         }
     }
-
-    return Polynomial(min, max, pol_koef);
-};
-
-Polynomial operator/(const Polynomial &p, int num) {
-    int tmp_koef[p.size];
-    for (int i = 0; i < p.size; i++) {
-        tmp_koef[i] = p.koef[i] / num;
-    }
-    return Polynomial(p.deg[0], p.deg[p.size - 1], tmp_koef);
-};
-
-//todo * from *=
-Polynomial operator*=(Polynomial &lhs, const Polynomial &rhs) {
-    lhs = lhs * rhs;
-    return lhs;
+    *this = Polynomial(min, max, pol_koef);
+    return *this;
 };
 
 Polynomial operator/=(Polynomial &p, int num) {
@@ -298,4 +303,3 @@ double Polynomial::get(double number) {
     }
     return ans;
 }
-

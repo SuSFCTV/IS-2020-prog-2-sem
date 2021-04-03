@@ -36,14 +36,16 @@ public:
 
     //friend Polynomial operator+=(const Polynomial &lhs, const Polynomial &rhs);
     Polynomial operator+=(const Polynomial &rhs);
-    friend Polynomial operator-=(Polynomial &lhs, const Polynomial &rhs);
+    Polynomial operator*=(const Polynomial &rhs);
+    //friend Polynomial operator-=(Polynomial &lhs, const Polynomial &rhs);
+    Polynomial operator-=(const Polynomial &rhs);
 
     friend Polynomial operator*(const Polynomial &p, int number);
     friend Polynomial operator*(int number, const Polynomial &p);
     friend Polynomial operator*(const Polynomial &lhs, const Polynomial &rhs);
     friend Polynomial operator/(const Polynomial &p, int number);
 
-    friend Polynomial operator*=(Polynomial &lhs, const Polynomial &rhs);
+    //friend Polynomial operator*=(Polynomial &lhs, const Polynomial &rhs);
     friend Polynomial operator/=(Polynomial &p, int number);
 
     friend std::stringstream &operator<< (std::stringstream &out, const Polynomial &p);
