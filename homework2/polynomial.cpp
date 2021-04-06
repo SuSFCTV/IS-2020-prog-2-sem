@@ -106,7 +106,9 @@ Polynomial operator-(const Polynomial &p) {
     int *temp = new int[p.size];
     for (int i = 0; i < p.size; i++)
         temp[i] = -p.koef[i];
-    return Polynomial(p.min_d, p.max_d, temp);
+    auto tmp_p = Polynomial(p.min_d, p.max_d, temp);
+    delete[] temp;
+    return tmp_p;
 };
 
 //fixed todo without creating new object
