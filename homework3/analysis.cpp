@@ -70,6 +70,7 @@ int XmlElem::get_size() const {
     return routes.size();
 }
 double coordinatesLength(const XmlElem &first, const XmlElem &second) {
+    //todo strange consts
     double first_latitude = first.get_coordinates_x() * M_PI / 180;
     double second_latitude = second.get_coordinates_x() * M_PI / 180;
 
@@ -194,7 +195,8 @@ void parser(vector<XmlElem> &thing, map<string, Routes> &mappedRoutes, set<strin
         thing.emplace_back(
                 XmlElem(numValue, vehicle_type, name_stopping, the_official_name, vectLoc, vecRoutes,
                         coordinates));
-
+	
+	    //todo copy-paste
         if (!strcmp(i.child_value("type_of_vehicle"), "Трамвай")) {
             for (int j = 0; j < vecRoutes.size(); ++j) {
                 mappedRoutes[vecRoutes[j]].Tram.emplace_back(
