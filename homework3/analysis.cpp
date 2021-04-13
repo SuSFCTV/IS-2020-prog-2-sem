@@ -79,124 +79,126 @@ double coordinatesLength(const XmlElem &first, const XmlElem &second) {
     double general_latitude = second_latitude - first_latitude;
     double general_longitude = second_longitude - first_longitude;
 
-    double answer = pow(sin(general_latitude / 2), 2) +
+    double ans = pow(sin(general_latitude / 2), 2) +
                     cos(first_latitude) * cos(second_latitude) * pow(sin(general_longitude / 2), 2);
 
-    answer = 2 * asin(sqrt(answer)) * 6731; // 6731 - радиус земли
+    ans = 2 * asin(sqrt(ans)) * 6731;
 
-    return answer;
+    return ans;
 }
-void separator(const string &source, string &firstItem, string &secondItem) {
+void separator(const string &thing, string &firstItem, string &secondItem) {
     string div = ",";
 
     auto start = 0;
-    auto end = source.find(div);
+    auto finish = thing.find(div);
 
-    while (end != -1) {
-        firstItem = source.substr(start, end - start);
-        start = end + div.length();
-        end = source.find(div, start);
+    while (finish != -1) {
+        firstItem = thing.substr(start, finish - start);
+        start = finish + div.length();
+        finish = thing.find(div, start);
     }
 
-    secondItem = source.substr(start, end);
+    secondItem = thing.substr(start, finish);
 }
-string sepLocation(string &source) {
-    vector<string> divisions{"ул.", " ул.", " УЛ.", " ш.", " Ш.", " шоссе", " ШОССЕ", " пер.", " ПЕР.", " переулок",
-                             " ПЕРЕУЛОК", " улица", "улица", " УЛИЦА", " бул", " БУЛ", " бульвар", " БУЛЬВАР",
-                             " пр",
-                             " ПР", " проспект", " ПРОСПЕКТ"};
+string sepLocation(string &thing) {
+    vector<string> subdiv{"ул.", " ул.", " УЛ.", " ш.", " Ш.", " шоссе", " ШОССЕ", " пер.",
+                          " ПЕР.", " переулок",
+                          " ПЕРЕУЛОК", " улица", "улица", " УЛИЦА", " бул",
+                          " БУЛ", " бульвар", " БУЛЬВАР",
+                          " пр",
+                          " ПР", " проспект", " ПРОСПЕКТ"};
 
-    for (auto &division : divisions) {
-        if (source.find(division) != -1) {
-            int firstVal = source.find(division);
+    for (auto &division : subdiv) {
+        if (thing.find(division) != -1) {
+            int firstVal = thing.find(division);
             int secondVal = firstVal + division.size();
-            source.erase(firstVal, secondVal);
+            thing.erase(firstVal, secondVal);
         }
     }
 
-    if (source[source.size() - 1] == ' ') {
-        source.erase(source.end() - 1);
+    if (thing[thing.size() - 1] == ' ') {
+        thing.erase(thing.end() - 1);
     }
-    return source;
+    return thing;
 }
 
-void parser(vector<XmlElem> &source, map<string, Routes> &mappedRoutes, set<string> &nameRoutes,
+void parser(vector<XmlElem> &thing, map<string, Routes> &mappedRoutes, set<string> &nameRoutes,
             map<string, int> &locations) {
     pugi::xml_document document;
-    document.load_file("data1.xml"); //подгружаем файл
-    pugi::xml_node data = document.child("dataset"); //вытаскиваем корень
+    document.load_file("data1.xml");
+    pugi::xml_node data = document.child("dataset");
 
     for (pugi::xml_node i = data.child("transport_station"); i; i = i.next_sibling("transport_station")) {
 
-        string firstParam;
-        string secondParam;
-        float firstValue;
-        float secondValue;
+        string first_param;
+        string second_param;
+        float first_val;
+        float second_val;
 
-        separator(i.child_value("coordinates"), firstParam, secondParam);
+        separator(i.child_value("coordinates"), first_param, second_param);
 
-        firstValue = stof(firstParam);
-        secondValue = stof(secondParam);
+        first_val = stof(first_param);
+        second_val = stof(second_param);
 
        pair<double, double> coordinates;
-        coordinates.first = firstValue;
-        coordinates.second = secondValue;
+        coordinates.first = first_val;
+        coordinates.second = second_val;
 //        auto [first_coord,sec_coord] = coordinates;
-//        first_coord = firstValue;
-//        sec_coord = secondValue;
+//        first_coord = first_val;
+//        sec_coord = second_val;
 
 
-        //ROUTES
-        firstParam = "";
-        secondParam = "";
+        //МАРШРУТЫ
+        first_param = "";
+        second_param = "";
 
         string strRoutes = i.child_value("routes"), segment;
-        stringstream tempStrRoutes(strRoutes);
+        stringstream tmp_StrRoutes(strRoutes);
         vector<string> vecRoutes;
 
         if (count(strRoutes.begin(), strRoutes.end(), ',')) {
-            while (getline(tempStrRoutes, segment, ',')) {
+            while (getline(tmp_StrRoutes, segment, ',')) {
                 vecRoutes.push_back(segment);
             }
         } else {
-            while (getline(tempStrRoutes, segment, '.')) {
+            while (getline(tmp_StrRoutes, segment, '.')) {
                 vecRoutes.push_back(segment);
             }
         }
 
-        //LOCATIONS
-        firstParam = "";
-        secondParam = "";
+        //МЕСТОПОЛОЖЕНИЯ
+        first_param = "";
+        second_param = "";
 
-        string strLocations = i.child_value("location");
-        vector<string> vecLocations;
-        stringstream tempStrLocations(strLocations);
+        string StrLoc = i.child_value("location");
+        vector<string> vectLoc;
+        stringstream tmp_StrLoc(StrLoc);
 
-        if (count(strLocations.begin(), strLocations.end(), ',') && !strLocations.empty()) {
-            while (getline(tempStrLocations, segment, ',')) {
+        if (count(StrLoc.begin(), StrLoc.end(), ',') && !StrLoc.empty()) {
+            while (getline(tmp_StrLoc, segment, ',')) {
                 if (segment[0] == ' ') {
                     segment.erase(segment.begin());
                 }
-                vecLocations.push_back(sepLocation(segment));
+                vectLoc.push_back(sepLocation(segment));
                 locations[sepLocation(segment)] += 1;
             }
-        } else if (!strLocations.empty()) {
-            vecLocations.push_back(sepLocation(strLocations));
-            locations[sepLocation(strLocations)] += 1;
+        } else if (!StrLoc.empty()) {
+            vectLoc.push_back(sepLocation(StrLoc));
+            locations[sepLocation(StrLoc)] += 1;
         }
 
         int numValue = stoi(i.child_value("number"));
-        string type_of_vehicle = i.child_value("type_of_vehicle");
+        string vehicle_type = i.child_value("type_of_vehicle");
         string name_stopping = i.child_value("name_stopping");
         string the_official_name = i.child_value("the_official_name");
-        source.emplace_back(
-                XmlElem(numValue, type_of_vehicle, name_stopping, the_official_name, vecLocations, vecRoutes,
+        thing.emplace_back(
+                XmlElem(numValue, vehicle_type, name_stopping, the_official_name, vectLoc, vecRoutes,
                         coordinates));
 
         if (!strcmp(i.child_value("type_of_vehicle"), "Трамвай")) {
             for (int j = 0; j < vecRoutes.size(); ++j) {
                 mappedRoutes[vecRoutes[j]].Tram.emplace_back(
-                        XmlElem(numValue, type_of_vehicle, name_stopping, the_official_name, vecLocations, vecRoutes,
+                        XmlElem(numValue, vehicle_type, name_stopping, the_official_name, vectLoc, vecRoutes,
                                 coordinates));
 
                 mappedRoutes[vecRoutes[j]].route = vecRoutes[j];
@@ -205,7 +207,7 @@ void parser(vector<XmlElem> &source, map<string, Routes> &mappedRoutes, set<stri
         } else if (!strcmp(i.child_value("type_of_vehicle"), "Автобус")) {
             for (int j = 0; j < vecRoutes.size(); ++j) {
                 mappedRoutes[vecRoutes[j]].Bus.emplace_back(
-                        XmlElem(numValue, type_of_vehicle, name_stopping, the_official_name, vecLocations, vecRoutes,
+                        XmlElem(numValue, vehicle_type, name_stopping, the_official_name, vectLoc, vecRoutes,
                                 coordinates));
 
                 mappedRoutes[vecRoutes[j]].route = vecRoutes[j];
@@ -214,7 +216,7 @@ void parser(vector<XmlElem> &source, map<string, Routes> &mappedRoutes, set<stri
         } else if (!strcmp(i.child_value("type_of_vehicle"), "Троллейбус")) {
             for (int j = 0; j < vecRoutes.size(); ++j) {
                 mappedRoutes[vecRoutes[j]].Trolleybus.emplace_back(
-                        XmlElem(numValue, type_of_vehicle, name_stopping, the_official_name, vecLocations, vecRoutes,
+                        XmlElem(numValue, vehicle_type, name_stopping, the_official_name, vectLoc, vecRoutes,
                                 coordinates));
 
                 mappedRoutes[vecRoutes[j]].route = vecRoutes[j];
@@ -238,17 +240,17 @@ void set_all_information(vector<XmlElem> &element, map<string, int> &tram_routes
         }
     }
 }
-void set_counter(map<string, int> &routes, int &counter, string &max_routes) {
-    for (auto const i : routes)
-        if (i.second > counter) {
-            counter = i.second;
-            max_routes = i.first;
-        }
-//    for(auto[a, b] : routes)
-//        if (b > counter){
-//            counter = b;
-//            max_routes = a;
+void set_count(map<string, int> &routes, int &counter, string &max_routes) {
+//    for (auto const i : routes)
+//        if (i.second > counter) {
+//            counter = i.second;
+//            max_routes = i.first;
 //        }
+    for(auto[a, b] : routes)
+        if (b > counter){
+            counter = b;
+            max_routes = a;
+        }
 }
 void set_routes(set<string> &names, map<string, Routes> &routes, map<string, float> &tram_routes_size,
                 map<string, float> &bus_routes_size, map<string, float> &trolleybus_routes_size) {
@@ -269,32 +271,32 @@ void set_routes(set<string> &names, map<string, Routes> &routes, map<string, flo
     }
 }
 void set_size(map<string, float> &routes_size, float &path_counter, string &max_route) {
-    for (auto const &i : routes_size) {
-        if (i.second > path_counter) {
-            path_counter = i.second;
-            max_route = i.first;
-        }
-    }
-//        for(const auto&[a, b] : routes_size){
-//            if (b > path_counter){
-//                path_counter = b;
-//                max_route = a;
-//            }
-//        }
-}
-void max_routes(int &maximum, string &max_size, map<string, int> &locations) {
-    for (auto const i : locations) {
-        if (i.second > maximum) {
-            maximum = i.second;
-            max_size = i.first;
-        }
-    }
-//    for(const auto&[a, b] : locations){
-//        if (b > maximum){
-//            maximum = b;
-//            max_size = a;
+//    for (auto const &i : routes_size) {
+//        if (i.second > path_counter) {
+//            path_counter = i.second;
+//            max_route = i.first;
 //        }
 //    }
+        for(const auto&[a, b] : routes_size){
+            if (b > path_counter){
+                path_counter = b;
+                max_route = a;
+            }
+        }
+}
+void max_routes(int &maximum, string &max_size, map<string, int> &locations) {
+//    for (auto const i : locations) {
+//        if (i.second > maximum) {
+//            maximum = i.second;
+//            max_size = i.first;
+//        }
+//    }
+    for(const auto&[a, b] : locations){
+        if (b > maximum){
+            maximum = b;
+            max_size = a;
+        }
+    }
 }
 
 

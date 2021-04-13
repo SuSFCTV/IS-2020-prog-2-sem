@@ -63,13 +63,13 @@ public:
     vector<XmlElem> Trolleybus;
 };
 double coordinatesLength(const XmlElem &first, const XmlElem &second);
-void separator(const string &source, string &firstItem, string &secondItem);
-string sepLocation(string &source);
-void parser(vector<XmlElem> &source, map<string, Routes> &mappedRoutes, set<string> &nameRoutes,
+void separator(const string &thing, string &firstItem, string &secondItem);
+string sepLocation(string &thing);
+void parser(vector<XmlElem> &thing, map<string, Routes> &mappedRoutes, set<string> &nameRoutes,
             map<string, int> &locations);
 void set_all_information(vector<XmlElem> &element, map<string, int> &tram_routes, map<string, int> &bus_routes,
                          map<string, int> &trolleybus_routes);
-void set_counter(map<string, int> &routes, int &counter, string &max_routes);
+void set_count(map<string, int> &routes, int &counter, string &max_routes);
 void set_routes(set<string> &names, map<string, Routes> &routes, map<string, float> &tram_routes_size,
                 map<string, float> &bus_routes_size, map<string, float> &trolleybus_routes_size);
 void set_size(map<string, float> &routes_size, float &path_counter, string &max_route);
