@@ -47,10 +47,9 @@ vector<string> XmlElem::get_routes() const {
 
 double XmlElem::get_coordinates_x() const {
     //cout << coordinates.first << "\n";
-    return coordinates.first;
-//    const auto&[first_coord, sec_coord] = coordinates;
-//    cout << first_coord << "\n";
-//    return first_coord;
+//    return coordinates.first;
+    auto[first_coord, sec_coord] = coordinates;
+    return first_coord;
 }
 
 double XmlElem::get_coordinates_y() const {
