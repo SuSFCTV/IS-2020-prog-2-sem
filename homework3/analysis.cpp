@@ -19,7 +19,8 @@ using std::map;
 using std::set;
 using std::string;
 using std::stringstream;
-
+const int radius_earth = 6731;
+const int degree = 180;
 XmlElem::XmlElem(int num, string type_of_vehicle, string name_stopping, string the_official_name, vector<string> location,
         vector<string> routes, pair<double, double> coordinates) :
         num(num), type_of_vehicle(type_of_vehicle), name_stopping(name_stopping),
@@ -69,13 +70,13 @@ string XmlElem::get_index(int index) const {
 int XmlElem::get_size() const {
     return routes.size();
 }
+//fixed strange const
 double coordinatesLength(const XmlElem &first, const XmlElem &second) {
-    //todo strange consts
-    double first_latitude = first.get_coordinates_x() * M_PI / 180;
-    double second_latitude = second.get_coordinates_x() * M_PI / 180;
+    double first_latitude = first.get_coordinates_x() * M_PI / degree;
+    double second_latitude = second.get_coordinates_x() * M_PI / degree;
 
-    double first_longitude = first.get_coordinates_y() * M_PI / 180;
-    double second_longitude = second.get_coordinates_y() * M_PI / 180;
+    double first_longitude = first.get_coordinates_y() * M_PI / degree;
+    double second_longitude = second.get_coordinates_y() * M_PI / degree;
 
     double general_latitude = second_latitude - first_latitude;
     double general_longitude = second_longitude - first_longitude;
@@ -83,7 +84,7 @@ double coordinatesLength(const XmlElem &first, const XmlElem &second) {
     double ans = pow(sin(general_latitude / 2), 2) +
                     cos(first_latitude) * cos(second_latitude) * pow(sin(general_longitude / 2), 2);
 
-    ans = 2 * asin(sqrt(ans)) * 6731;
+    ans = 2 * asin(sqrt(ans)) * radius_earth;
 
     return ans;
 }
@@ -122,6 +123,8 @@ string sepLocation(string &thing) {
     }
     return thing;
 }
+
+
 
 void parser(vector<XmlElem> &thing, map<string, Routes> &mappedRoutes, set<string> &nameRoutes,
             map<string, int> &locations) {
@@ -195,8 +198,7 @@ void parser(vector<XmlElem> &thing, map<string, Routes> &mappedRoutes, set<strin
         thing.emplace_back(
                 XmlElem(numValue, vehicle_type, name_stopping, the_official_name, vectLoc, vecRoutes,
                         coordinates));
-	
-	    //todo copy-paste
+
         if (!strcmp(i.child_value("type_of_vehicle"), "Трамвай")) {
             for (int j = 0; j < vecRoutes.size(); ++j) {
                 mappedRoutes[vecRoutes[j]].Tram.emplace_back(
@@ -206,6 +208,7 @@ void parser(vector<XmlElem> &thing, map<string, Routes> &mappedRoutes, set<strin
                 mappedRoutes[vecRoutes[j]].route = vecRoutes[j];
                 nameRoutes.insert(vecRoutes[j]);
             }
+
         } else if (!strcmp(i.child_value("type_of_vehicle"), "Автобус")) {
             for (int j = 0; j < vecRoutes.size(); ++j) {
                 mappedRoutes[vecRoutes[j]].Bus.emplace_back(
