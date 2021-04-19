@@ -124,7 +124,45 @@ string sepLocation(string &thing) {
     return thing;
 }
 
+void routes_tram(set<string> &nameRoutes, map<string, Routes> &mappedRoutes,vector<string> &vecRoutes,
+                 int numValue, string vehicle_type, string name_stopping, string the_official_name, vector<string> vectLoc,
+                 pair<double, double> coordinates) {
+    for (int j = 0; j < vecRoutes.size(); ++j) {
+        mappedRoutes[vecRoutes[j]].Tram.emplace_back(
+                XmlElem(numValue, vehicle_type, name_stopping, the_official_name, vectLoc, vecRoutes,
+                        coordinates));
 
+        mappedRoutes[vecRoutes[j]].route = vecRoutes[j];
+        nameRoutes.insert(vecRoutes[j]);
+    }
+}
+
+void routes_bus(set<string> &nameRoutes, map<string, Routes> &mappedRoutes,vector<string> &vecRoutes,
+                int numValue, string vehicle_type, string name_stopping, string the_official_name, vector<string> vectLoc,
+                pair<double, double> coordinates) {
+    for (int j = 0; j < vecRoutes.size(); ++j) {
+        mappedRoutes[vecRoutes[j]].Bus.emplace_back(
+                XmlElem(numValue, vehicle_type, name_stopping, the_official_name, vectLoc, vecRoutes,
+                        coordinates));
+
+        mappedRoutes[vecRoutes[j]].route = vecRoutes[j];
+        nameRoutes.insert(vecRoutes[j]);
+    }
+}
+
+void routes_trol(set<string> &nameRoutes, map<string, Routes> &mappedRoutes,vector<string> &vecRoutes,
+                 int numValue, string vehicle_type, string name_stopping, string the_official_name, vector<string> vectLoc,
+                 pair<double, double> coordinates) {
+    for (int j = 0; j < vecRoutes.size(); ++j) {
+        mappedRoutes[vecRoutes[j]].Trolleybus.emplace_back(
+                XmlElem(numValue, vehicle_type, name_stopping, the_official_name, vectLoc, vecRoutes,
+                        coordinates));
+
+        mappedRoutes[vecRoutes[j]].route = vecRoutes[j];
+        nameRoutes.insert(vecRoutes[j]);
+    }
+
+}
 
 void parser(vector<XmlElem> &thing, map<string, Routes> &mappedRoutes, set<string> &nameRoutes,
             map<string, int> &locations) {
@@ -198,35 +236,19 @@ void parser(vector<XmlElem> &thing, map<string, Routes> &mappedRoutes, set<strin
         thing.emplace_back(
                 XmlElem(numValue, vehicle_type, name_stopping, the_official_name, vectLoc, vecRoutes,
                         coordinates));
-
+        //fixed copy-paste
         if (!strcmp(i.child_value("type_of_vehicle"), "Трамвай")) {
-            for (int j = 0; j < vecRoutes.size(); ++j) {
-                mappedRoutes[vecRoutes[j]].Tram.emplace_back(
-                        XmlElem(numValue, vehicle_type, name_stopping, the_official_name, vectLoc, vecRoutes,
-                                coordinates));
-
-                mappedRoutes[vecRoutes[j]].route = vecRoutes[j];
-                nameRoutes.insert(vecRoutes[j]);
-            }
-
+            routes_tram(nameRoutes, mappedRoutes,vecRoutes,
+                        numValue,  vehicle_type,  name_stopping,  the_official_name,  vectLoc,
+                        coordinates);
         } else if (!strcmp(i.child_value("type_of_vehicle"), "Автобус")) {
-            for (int j = 0; j < vecRoutes.size(); ++j) {
-                mappedRoutes[vecRoutes[j]].Bus.emplace_back(
-                        XmlElem(numValue, vehicle_type, name_stopping, the_official_name, vectLoc, vecRoutes,
-                                coordinates));
-
-                mappedRoutes[vecRoutes[j]].route = vecRoutes[j];
-                nameRoutes.insert(vecRoutes[j]);
-            }
+            routes_bus(nameRoutes, mappedRoutes,vecRoutes,
+                        numValue,  vehicle_type,  name_stopping,  the_official_name,  vectLoc,
+                        coordinates);
         } else if (!strcmp(i.child_value("type_of_vehicle"), "Троллейбус")) {
-            for (int j = 0; j < vecRoutes.size(); ++j) {
-                mappedRoutes[vecRoutes[j]].Trolleybus.emplace_back(
-                        XmlElem(numValue, vehicle_type, name_stopping, the_official_name, vectLoc, vecRoutes,
-                                coordinates));
-
-                mappedRoutes[vecRoutes[j]].route = vecRoutes[j];
-                nameRoutes.insert(vecRoutes[j]);
-            }
+            routes_trol(nameRoutes, mappedRoutes,vecRoutes,
+                        numValue,  vehicle_type,  name_stopping,  the_official_name,  vectLoc,
+                        coordinates);
         }
     }
 }

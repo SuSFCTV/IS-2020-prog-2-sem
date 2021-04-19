@@ -62,6 +62,15 @@ public:
     vector<XmlElem> Tram;
     vector<XmlElem> Trolleybus;
 };
+void routes_tram(set<string> &nameRoutes, map<string, Routes> &mappedRoutes,vector<string> &vecRoutes,
+                 int numValue, string vehicle_type, string name_stopping, string the_official_name, vector<string> vectLoc,
+                 pair<double, double> coordinates);
+void routes_bus(set<string> &nameRoutes, map<string, Routes> &mappedRoutes,vector<string> &vecRoutes,
+                int numValue, string vehicle_type, string name_stopping, string the_official_name, vector<string> vectLoc,
+                pair<double, double> coordinates);
+void routes_trol(set<string> &nameRoutes, map<string, Routes> &mappedRoutes,vector<string> &vecRoutes,
+                 int numValue, string vehicle_type, string name_stopping, string the_official_name, vector<string> vectLoc,
+                 pair<double, double> coordinates);
 double coordinatesLength(const XmlElem &first, const XmlElem &second);
 void separator(const string &thing, string &firstItem, string &secondItem);
 string sepLocation(string &thing);
