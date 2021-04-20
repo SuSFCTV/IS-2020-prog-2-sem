@@ -19,6 +19,7 @@ using std::map;
 using std::set;
 using std::string;
 using std::stringstream;
+//todo const CAPS
 const int radius_earth = 6731;
 const int degree = 180;
 XmlElem::XmlElem(int num, string type_of_vehicle, string name_stopping, string the_official_name, vector<string> location,
@@ -236,7 +237,7 @@ void parser(vector<XmlElem> &thing, map<string, Routes> &mappedRoutes, set<strin
         thing.emplace_back(
                 XmlElem(numValue, vehicle_type, name_stopping, the_official_name, vectLoc, vecRoutes,
                         coordinates));
-        //fixed copy-paste
+        //todo copy-paste
         if (!strcmp(i.child_value("type_of_vehicle"), "Трамвай")) {
             routes_tram(nameRoutes, mappedRoutes,vecRoutes,
                         numValue,  vehicle_type,  name_stopping,  the_official_name,  vectLoc,
@@ -281,6 +282,7 @@ void set_count(map<string, int> &routes, int &counter, string &max_routes) {
 }
 void set_routes(set<string> &names, map<string, Routes> &routes, map<string, float> &tram_routes_size,
                 map<string, float> &bus_routes_size, map<string, float> &trolleybus_routes_size) {
+    //todo copy-paste
     for (auto const j : names) {
         if (routes[j].Tram.size() > 1) {
             for (int k = 0; k < routes[j].Tram.size() - 1; k++)
