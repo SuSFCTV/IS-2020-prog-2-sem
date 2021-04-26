@@ -71,6 +71,9 @@ void routes_bus(set<string> &nameRoutes, map<string, Routes> &mappedRoutes,vecto
 void routes_trol(set<string> &nameRoutes, map<string, Routes> &mappedRoutes,vector<string> &vecRoutes,
                  int numValue, string vehicle_type, string name_stopping, string the_official_name, vector<string> vectLoc,
                  pair<double, double> coordinates);
+void routes_type(set<string> &nameRoutes, map<string, Routes> &mappedRoutes,vector<string> &vecRoutes,
+                 int numValue, string vehicle_type, string name_stopping, string the_official_name, vector<string> vectLoc,
+                 pair<double, double> coordinates, int j);
 double coordinatesLength(const XmlElem &first, const XmlElem &second);
 void separator(const string &thing, string &firstItem, string &secondItem);
 string sepLocation(string &thing);
@@ -81,6 +84,7 @@ void set_all_information(vector<XmlElem> &element, map<string, int> &tram_routes
 void set_count(map<string, int> &routes, int &counter, string &max_routes);
 void set_routes(set<string> &names, map<string, Routes> &routes, map<string, float> &tram_routes_size,
                 map<string, float> &bus_routes_size, map<string, float> &trolleybus_routes_size);
+void routes_size(vector<XmlElem> &value,map<string, float> &container,map<string, Routes> &routes,string j);
 void set_size(map<string, float> &routes_size, float &path_counter, string &max_route);
 void max_routes(int &maximum, string &max_size, map<string, int> &locations);
 #endif //MAIN_CPP_ANALYSIS_H

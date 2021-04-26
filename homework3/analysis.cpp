@@ -19,9 +19,8 @@ using std::map;
 using std::set;
 using std::string;
 using std::stringstream;
-//todo const CAPS
-const int radius_earth = 6731;
-const int degree = 180;
+const int RADIUS_EARTH = 6731;
+const int DEGREE = 180;
 XmlElem::XmlElem(int num, string type_of_vehicle, string name_stopping, string the_official_name, vector<string> location,
         vector<string> routes, pair<double, double> coordinates) :
         num(num), type_of_vehicle(type_of_vehicle), name_stopping(name_stopping),
@@ -73,11 +72,11 @@ int XmlElem::get_size() const {
 }
 //fixed strange const
 double coordinatesLength(const XmlElem &first, const XmlElem &second) {
-    double first_latitude = first.get_coordinates_x() * M_PI / degree;
-    double second_latitude = second.get_coordinates_x() * M_PI / degree;
+    double first_latitude = first.get_coordinates_x() * M_PI / DEGREE;
+    double second_latitude = second.get_coordinates_x() * M_PI / DEGREE;
 
-    double first_longitude = first.get_coordinates_y() * M_PI / degree;
-    double second_longitude = second.get_coordinates_y() * M_PI / degree;
+    double first_longitude = first.get_coordinates_y() * M_PI / DEGREE;
+    double second_longitude = second.get_coordinates_y() * M_PI / DEGREE;
 
     double general_latitude = second_latitude - first_latitude;
     double general_longitude = second_longitude - first_longitude;
@@ -85,7 +84,7 @@ double coordinatesLength(const XmlElem &first, const XmlElem &second) {
     double ans = pow(sin(general_latitude / 2), 2) +
                     cos(first_latitude) * cos(second_latitude) * pow(sin(general_longitude / 2), 2);
 
-    ans = 2 * asin(sqrt(ans)) * radius_earth;
+    ans = 2 * asin(sqrt(ans)) * RADIUS_EARTH;
 
     return ans;
 }
@@ -132,9 +131,12 @@ void routes_tram(set<string> &nameRoutes, map<string, Routes> &mappedRoutes,vect
         mappedRoutes[vecRoutes[j]].Tram.emplace_back(
                 XmlElem(numValue, vehicle_type, name_stopping, the_official_name, vectLoc, vecRoutes,
                         coordinates));
+        routes_type(nameRoutes, mappedRoutes,vecRoutes,
+                    numValue,  vehicle_type,  name_stopping,  the_official_name,  vectLoc,
+                    coordinates, j);
 
-        mappedRoutes[vecRoutes[j]].route = vecRoutes[j];
-        nameRoutes.insert(vecRoutes[j]);
+//        mappedRoutes[vecRoutes[j]].route = vecRoutes[j];
+//        nameRoutes.insert(vecRoutes[j]);
     }
 }
 
@@ -145,9 +147,12 @@ void routes_bus(set<string> &nameRoutes, map<string, Routes> &mappedRoutes,vecto
         mappedRoutes[vecRoutes[j]].Bus.emplace_back(
                 XmlElem(numValue, vehicle_type, name_stopping, the_official_name, vectLoc, vecRoutes,
                         coordinates));
+        routes_type(nameRoutes, mappedRoutes,vecRoutes,
+                    numValue,  vehicle_type,  name_stopping,  the_official_name,  vectLoc,
+                    coordinates, j);
 
-        mappedRoutes[vecRoutes[j]].route = vecRoutes[j];
-        nameRoutes.insert(vecRoutes[j]);
+//        mappedRoutes[vecRoutes[j]].route = vecRoutes[j];
+//        nameRoutes.insert(vecRoutes[j]);
     }
 }
 
@@ -159,10 +164,22 @@ void routes_trol(set<string> &nameRoutes, map<string, Routes> &mappedRoutes,vect
                 XmlElem(numValue, vehicle_type, name_stopping, the_official_name, vectLoc, vecRoutes,
                         coordinates));
 
-        mappedRoutes[vecRoutes[j]].route = vecRoutes[j];
-        nameRoutes.insert(vecRoutes[j]);
+        routes_type(nameRoutes, mappedRoutes,vecRoutes,
+                    numValue,  vehicle_type,  name_stopping,  the_official_name,  vectLoc,
+                    coordinates, j);
+
+//        mappedRoutes[vecRoutes[j]].route = vecRoutes[j];
+//        nameRoutes.insert(vecRoutes[j]);
     }
 
+}
+//fixed copy-paste
+void routes_type(set<string> &nameRoutes, map<string, Routes> &mappedRoutes,vector<string> &vecRoutes,
+                 int numValue, string vehicle_type, string name_stopping, string the_official_name, vector<string> vectLoc,
+                 pair<double, double> coordinates, int j){
+
+    mappedRoutes[vecRoutes[j]].route = vecRoutes[j];
+    nameRoutes.insert(vecRoutes[j]);
 }
 
 void parser(vector<XmlElem> &thing, map<string, Routes> &mappedRoutes, set<string> &nameRoutes,
@@ -237,16 +254,19 @@ void parser(vector<XmlElem> &thing, map<string, Routes> &mappedRoutes, set<strin
         thing.emplace_back(
                 XmlElem(numValue, vehicle_type, name_stopping, the_official_name, vectLoc, vecRoutes,
                         coordinates));
-        //todo copy-paste
-        if (!strcmp(i.child_value("type_of_vehicle"), "Трамвай")) {
+
+        string type_veh = i.child_value("type_of_vehicle");
+        if (!strcmp(type_veh.c_str(), "Трамвай")) {
             routes_tram(nameRoutes, mappedRoutes,vecRoutes,
                         numValue,  vehicle_type,  name_stopping,  the_official_name,  vectLoc,
                         coordinates);
-        } else if (!strcmp(i.child_value("type_of_vehicle"), "Автобус")) {
+
+        } else if (!strcmp(type_veh.c_str(), "Автобус")) {
             routes_bus(nameRoutes, mappedRoutes,vecRoutes,
                         numValue,  vehicle_type,  name_stopping,  the_official_name,  vectLoc,
                         coordinates);
-        } else if (!strcmp(i.child_value("type_of_vehicle"), "Троллейбус")) {
+
+        } else if (!strcmp(type_veh.c_str(), "Троллейбус")) {
             routes_trol(nameRoutes, mappedRoutes,vecRoutes,
                         numValue,  vehicle_type,  name_stopping,  the_official_name,  vectLoc,
                         coordinates);
@@ -280,24 +300,39 @@ void set_count(map<string, int> &routes, int &counter, string &max_routes) {
             max_routes = a;
         }
 }
-void set_routes(set<string> &names, map<string, Routes> &routes, map<string, float> &tram_routes_size,
-                map<string, float> &bus_routes_size, map<string, float> &trolleybus_routes_size) {
-    //todo copy-paste
-    for (auto const j : names) {
-        if (routes[j].Tram.size() > 1) {
-            for (int k = 0; k < routes[j].Tram.size() - 1; k++)
-                tram_routes_size[routes[j].route] += coordinatesLength(routes[j].Tram[k], routes[j].Tram[k + 1]);
-        }
-        if (routes[j].Bus.size() > 1) {
-            for (int k = 0; k < routes[j].Bus.size() - 1; k++)
-                bus_routes_size[routes[j].route] += coordinatesLength(routes[j].Bus[k], routes[j].Bus[k + 1]);
-        }
-        if (routes[j].Trolleybus.size() > 1) {
-            for (int k = 0; k < routes[j].Trolleybus.size() - 1; k++)
-                trolleybus_routes_size[routes[j].route] += coordinatesLength(routes[j].Trolleybus[k],
-                                                                             routes[j].Trolleybus[k + 1]);
+void routes_size(vector<XmlElem> &value,map<string, float> &container,map<string, Routes> &routes,string j){
+    if (value.size() > 1){
+        for (int k = 0; k < value.size() - 1; ++k) {
+            //container.at(routes.at(j).route) += coordinatesLength(value[k], value[k + 1]);
+            container[routes[j].route] += coordinatesLength(value[k], value[k + 1]);
         }
     }
+}
+void set_routes(set<string> &names, map<string, Routes> &routes, map<string, float> &tram_routes_size,
+                map<string, float> &bus_routes_size, map<string, float> &trolleybus_routes_size) {
+//fixed copy-paste
+
+//    for (auto const j : names) {
+//        if (routes[j].Tram.size() > 1) {
+//            for (int k = 0; k < routes[j].Tram.size() - 1; k++)
+//                tram_routes_size[routes[j].route] += coordinatesLength(routes[j].Tram[k], routes[j].Tram[k + 1]);
+//        }
+//        if (routes[j].Bus.size() > 1) {
+//            for (int k = 0; k < routes[j].Bus.size() - 1; k++)
+//                bus_routes_size[routes[j].route] += coordinatesLength(routes[j].Bus[k], routes[j].Bus[k + 1]);
+//        }
+//        if (routes[j].Trolleybus.size() > 1) {
+//            for (int k = 0; k < routes[j].Trolleybus.size() - 1; k++)
+//                trolleybus_routes_size[routes[j].route] += coordinatesLength(routes[j].Trolleybus[k],
+//                                                                             routes[j].Trolleybus[k + 1]);
+//        }
+//    }
+    for (auto j : names){
+        routes_size(routes[j].Tram, tram_routes_size, routes, j);
+        routes_size(routes[j].Bus, bus_routes_size,routes, j);
+        routes_size(routes[j].Trolleybus, trolleybus_routes_size,routes, j);
+    }
+
 }
 void set_size(map<string, float> &routes_size, float &path_counter, string &max_route) {
 //    for (auto const &i : routes_size) {
