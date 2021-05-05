@@ -1,0 +1,42 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/misha/Desktop/labs/prog/homework4/main.cpp
+predicate.hpp
+C:/Users/misha/Desktop/labs/prog/homework4/predicate.hpp
+iostream
+-
+sstream
+-
+assert.h
+-
+vector
+-
+set
+-
+iterator
+-
+functional
+-
+
+C:/Users/misha/Desktop/labs/prog/homework4/predicate.hpp
+iostream
+-
+sstream
+-
+assert.h
+-
+vector
+-
+set
+-
+iterator
+-
+functional
+-
+
