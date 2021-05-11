@@ -15,9 +15,9 @@
 
 using namespace std;
 
-template<typename T, typename P>
-bool allOf(const T begin,const  T end, const P &p) {
-    for (T i = begin; i != end; i++) {
+template<typename Iterator, typename Predicate>
+bool allOf(const Iterator begin, const  Iterator end, const Predicate &p) {
+    for (Iterator i = begin; i != end; i++) {
         if (!p(*i)) {
             return false;
         }
@@ -25,9 +25,9 @@ bool allOf(const T begin,const  T end, const P &p) {
     return true;
 };
 
-template<typename T, typename P>
-bool anyOf(const T &begin, const T &end, const P &p) {
-    for (T i = begin; i < end; i++) {
+template<typename Iterator, typename Predicate>
+bool anyOf(const Iterator &begin, const Iterator &end, const Predicate &p) {
+    for (Iterator i = begin; i < end; i++) {
         if (p(*i)) {
             return true;
         }
@@ -35,9 +35,9 @@ bool anyOf(const T &begin, const T &end, const P &p) {
     return false;
 }
 
-template <typename T, typename P>
-bool noneOf (const T& begin, const T& end, P p) {
-    for (T i = begin; i != end; ++i) {
+template <typename Iterator, typename Predicate>
+bool noneOf (const Iterator& begin, const Iterator& end, Predicate p) {
+    for (Iterator i = begin; i != end; ++i) {
         if (p(*i)) {
             return false;
         }
@@ -45,10 +45,10 @@ bool noneOf (const T& begin, const T& end, P p) {
     return true;
 }
 
-template<typename T, typename P>
-bool oneOf(const T &begin, const T &end, const P &p) {
+template<typename Iterator, typename Predicate>
+bool oneOf(const Iterator &begin, const Iterator &end, const Predicate &p) {
     int cnt = 0;
-    for (T i = begin; i < end; i++) {
+    for (Iterator i = begin; i < end; i++) {
         if (p(*i)) {
             cnt++;
         }
@@ -61,9 +61,9 @@ bool oneOf(const T &begin, const T &end, const P &p) {
     }
 }
 
-template<typename T, typename P = less<>>
-bool isSorted(T begin, T end, P p = P()) {
-    for (T i = begin; i < end - 1; i++) {
+template<typename Iterator, typename Predicate = less<>>
+bool isSorted(Iterator begin, Iterator end, Predicate p = Predicate()) {
+    for (Iterator i = begin; i < end - 1; i++) {
         if (!p(*i, *(i + 1))) {
             return false;
         }
@@ -72,8 +72,8 @@ bool isSorted(T begin, T end, P p = P()) {
 }
 
 
-template <typename T, typename P>
-bool isPartitioned (T first, T last, P p) {
+template <typename Iterator, typename Predicate>
+bool isPartitioned (Iterator first, Iterator last, Predicate p) {
     for (; first != last; ++first) {
         if (!p(*first))
             break;
@@ -85,9 +85,9 @@ bool isPartitioned (T first, T last, P p) {
     return true;
 }
 
-template<typename T1, typename T2>
-T1 findNot(const T1 &begin, const T1 &end, T2 value) {
-    for (T1 i = begin; i < end; i++) {
+template<typename Iterator, typename T>
+Iterator findNot(const Iterator &begin, const Iterator &end, T value) {
+    for (Iterator i = begin; i < end; i++) {
         if (*i != value) {
             return i;
         }
@@ -95,8 +95,8 @@ T1 findNot(const T1 &begin, const T1 &end, T2 value) {
     return end;
 }
 
-template<typename T, typename F>
-T findBackward(T first, T second, const F &value) {
+template<typename Iterator, typename F>
+Iterator findBackward(Iterator first, Iterator second, const F &value) {
     auto temp_value = second;
     while (first != second) {
         if (*first == value) {
@@ -107,8 +107,8 @@ T findBackward(T first, T second, const F &value) {
     return temp_value;
 }
 
-template<typename T, typename C>
-bool isPalindrome(T first, T last, C comp){
+template<typename Iterator, typename Compare>
+bool isPalindrome(Iterator first, Iterator last, Compare comp){
     if (first == last){
         return true;
     }
