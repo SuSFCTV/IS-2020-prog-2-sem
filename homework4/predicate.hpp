@@ -36,9 +36,9 @@ bool anyOf(const T &begin, const T &end, const P &p) {
 }
 
 template <typename T, typename P>
-bool noneOf (const T& begin, const T& end, P func) {
+bool noneOf (const T& begin, const T& end, P p) {
     for (T i = begin; i != end; ++i) {
-        if (func(*i)) {
+        if (p(*i)) {
             return false;
         }
     }
@@ -47,14 +47,14 @@ bool noneOf (const T& begin, const T& end, P func) {
 
 template<typename T, typename P>
 bool oneOf(const T &begin, const T &end, const P &p) {
-    int count_of_agrees = 0;
+    int cnt = 0;
     for (T i = begin; i < end; i++) {
         if (p(*i)) {
-            count_of_agrees++;
+            cnt++;
         }
     }
 
-    if (count_of_agrees == 1) {
+    if (cnt == 1) {
         return true;
     } else {
         return false;
@@ -62,9 +62,9 @@ bool oneOf(const T &begin, const T &end, const P &p) {
 }
 
 template<typename T, typename P = less<>>
-bool isSorted(T begin, T end, P pred = P()) {
+bool isSorted(T begin, T end, P p = P()) {
     for (T i = begin; i < end - 1; i++) {
-        if (!pred(*i, *(i + 1))) {
+        if (!p(*i, *(i + 1))) {
             return false;
         }
     }
@@ -73,13 +73,13 @@ bool isSorted(T begin, T end, P pred = P()) {
 
 
 template <typename T, typename P>
-bool isPartitioned (T first, T last, P pred) {
+bool isPartitioned (T first, T last, P p) {
     for (; first != last; ++first) {
-        if (!pred(*first))
+        if (!p(*first))
             break;
     }
     for (; first != last; ++first) {
-        if (pred(*first))
+        if (p(*first))
             return false;
     }
     return true;
