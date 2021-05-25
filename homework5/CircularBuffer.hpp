@@ -3,6 +3,8 @@
 #include <iterator>
 
 using namespace std;
+//todo O(1)
+//todo there is already min in c++
 #define min(a, b) ((a < b) ? a : b)
 
 template<class T>
@@ -300,7 +302,7 @@ public:
             return *(array + index);
         }
     }
-
+    //todo more information in exceptions
     T &operator[](unsigned index) {
         if (size == 0) {
             throw range_error("Empty buffer");
