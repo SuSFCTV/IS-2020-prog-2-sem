@@ -13,6 +13,8 @@ exception
 -
 iterator
 -
+string
+-
 
 C:/Users/misha/Desktop/labs/prog/homework5/main.cpp
 iostream
