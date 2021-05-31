@@ -58,7 +58,7 @@ int depth = 0;
 int maxDepth = 0;
 
 
-ostream& operator<<(ostream& out, CircularBuffer<int> a){
+ostream& operator<<(ostream& out, const CircularBuffer<int>& a){
     depth++;
     int myDepth = depth;
     maxDepth = max(maxDepth, depth);
@@ -200,5 +200,8 @@ int main(){
                                        "\n"
                                        "2 3 4 5 6\n"
                                        "\n");
+    CircularBuffer<string> cs(4);
+    cs.addFirst("First");
+    print(cs[0]);
     print("Everything is ok");
 }
