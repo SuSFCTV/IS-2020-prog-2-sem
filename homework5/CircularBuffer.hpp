@@ -3,7 +3,7 @@
 #include <iterator>
 #include <string>
 using namespace std;
-//fixed O(1)
+//there is already min in c++ (still)
 #define min(a, b) ((a < b) ? a : b)
 template<class T>
 class Iterator  {
