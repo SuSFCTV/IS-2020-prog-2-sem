@@ -3,8 +3,8 @@
 #include <iterator>
 #include <string>
 using namespace std;
-//there is already min in c++ (still)
-#define min(a, b) ((a < b) ? a : b)
+//fixed min
+
 template<class T>
 class Iterator  {
     T* array;
