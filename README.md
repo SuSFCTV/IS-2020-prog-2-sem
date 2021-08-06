@@ -8,7 +8,7 @@
 ### Lab2
 
 #### [Задание](https://drive.google.com/file/d/1iY_AC1E5Y2GW4aNGFsbTF2BV_QkHcACZ/view?usp=sharing)
-* [Классы. Перегрузка операторов] (https://github.com/SuSFCTV/IS-2020-prog-2-sem/tree/main/homework2)
+* [Классы. Перегрузка операторов](https://github.com/SuSFCTV/IS-2020-prog-2-sem/tree/main/homework2)
 ---
 ### Lab3
 
